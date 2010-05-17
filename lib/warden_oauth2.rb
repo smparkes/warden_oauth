@@ -1,11 +1,11 @@
 require "rack"
 require "warden"
-require "oauth"
+require "oauth2"
 
 module Warden
-  module OAuth
+  module OAuth2
 
-    base_path = File.dirname(__FILE__) + "/warden_oauth"
+    base_path = File.dirname(__FILE__) + "/warden_oauth2"
     
     require base_path + "/base"
     require base_path + "/errors"
