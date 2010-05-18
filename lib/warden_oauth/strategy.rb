@@ -45,7 +45,7 @@ module Warden
           store_request_token_on_session
           redirect!(request_token.authorize_url)
           throw(:warden)
-        elsif params.include?('oauth_token')
+        elsif params.include?('oauth_token') and session[:request_class] == self.class.to_s
           load_request_token_from_session
           if missing_stored_token?
             fail!("There is no OAuth authentication in progress")
@@ -113,11 +113,13 @@ ERROR_MESSAGE
       end
 
       def store_request_token_on_session
+        session[:request_class] = self.class.to_s
         session[:request_token]  = request_token.token
         session[:request_secret] = request_token.secret
       end
 
       def load_request_token_from_session
+        session.delete(:request_class)
         token  = session.delete(:request_token)
         secret = session.delete(:request_secret)
         @request_token = ::OAuth::RequestToken.new(consumer, token, secret)
