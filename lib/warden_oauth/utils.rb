@@ -21,7 +21,7 @@ module Warden
       # Fetched from ActionController::Request to avoid dependencies
       #
       def host_with_port(request)
-        url = request.scheme + "://"
+        url = (request.env["HTTP_X_FORWARDED_PROTO"] ? request.env["HTTP_X_FORWARDED_PROTO"]  : request.scheme) + "://"
         url << request.host
 
         if request.scheme == "https" && request.port != 443 ||
