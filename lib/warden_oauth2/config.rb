@@ -1,27 +1,27 @@
 module Warden
-  module OAuth
+  module OAuth2
   
     #
-    # Holds all the information of the OAuth service.
+    # Holds all the information of the OAuth2 service.
     #
     class Config
       attr_accessor :provider_name
       
-      def consumer_key(key = nil)
+      def client_key(key = nil)
         unless key.nil?
-          @consumer_key = key
+          @client_key = key
         end
-        @consumer_key
+        @client_key
       end
-      alias_method :consumer_key=, :consumer_key
+      alias_method :client_key=, :client_key
 
-      def consumer_secret(secret = nil)
+      def client_secret(secret = nil)
         unless secret.nil?
-          @consumer_secret = secret
+          @client_secret = secret
         end
-        @consumer_secret
+        @client_secret
       end
-      alias_method :consumer_secret=, :consumer_secret
+      alias_method :client_secret=, :client_secret
 
       def options(options = nil) 
         unless options.nil?
@@ -32,8 +32,8 @@ module Warden
       alias_method :options=, :options
 
       def check_requirements
-        if @consumer_key.nil? || @consumer_secret.nil?
-          raise Warden::OAuth::ConfigError.new("You need to specify the consumer key and the consumer secret")
+        if @client_key.nil? || @client_secret.nil?
+          raise Warden::OAuth2::ConfigError.new("You need to specify the client key and the client secret")
         end
       end
 

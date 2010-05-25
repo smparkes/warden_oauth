@@ -4,18 +4,18 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "warden_oauth"
-    gem.summary = %Q{OAuth Strategy generator for Warden Authentication Framework}
+    gem.name = "warden_oauth2"
+    gem.summary = %Q{OAuth2 Strategy generator for Warden Authentication Framework}
     gem.description = %Q{ 
-      warden_oauth will help you create oauth authentication strategies using the oauth
+      warden_oauth2 will help you create oauth2 authentication strategies using the oauth2
       helper method on the Warden::Manager config setup
     }
     gem.email = "romanandreg@gmail.com"
-    gem.homepage = "http://github.com/roman/warden_oauth"
+    gem.homepage = "http://github.com/roman/warden_oauth2"
     gem.authors = ["Roman Gonzalez"]
-    gem.rubyforge_project = "warden_oauth"
+    gem.rubyforge_project = "warden_oauth2"
     gem.add_dependency('warden', ">= 0.8.1")
-    gem.add_dependency('oauth')
+    gem.add_dependency('oauth2')
     gem.add_development_dependency("rack-test")
     gem.add_development_dependency("fakeweb")
     gem.add_development_dependency("rspec")

@@ -1,29 +1,29 @@
 module Warden
-  module OAuth
+  module OAuth2
 
     #
-    # Holds all the extensions made to Warden::Config in order to create OAuth
+    # Holds all the extensions made to Warden::Config in order to create OAuth2
     # consumers.
     #
     module ConfigExtension
 
       #
-      # Helps to setup a new OAuth client authentication, to get started you need to define
+      # Helps to setup a new OAuth2 client authentication, to get started you need to define
       # a service name, and then on the block assign the different values required in order
-      # to boot the OAuth process.
-      # @param [Symbol] service An identifier of the OAuth service
+      # to boot the OAuth2 process.
+      # @param [Symbol] service An identifier of the OAuth2 service
       # 
       # @example
       #   use Warden::Manager do |config|
-      #     config.oauth(:twitter) do
+      #     config.oauth2(:twitter) do
       #       consumer_key "<YOUR CONSUMER KEY>"
       #       consumer_secret "<YOUR CONSUMER SECRET>"
       #       options :site => 'http://twitter.com'
       #     end
       #   end
       #
-      def oauth(service, &block)
-        config = Warden::OAuth::Config.new
+      def oauth2(service, &block)
+        config = Warden::OAuth2::Config.new
         if block_given?
           if block.arity == 1 
             yield config 
@@ -33,7 +33,7 @@ module Warden
         end
         config.check_requirements
         config.provider_name = service
-        Warden::OAuth::Strategy.build(service, config)
+        Warden::OAuth2::Strategy.build(service, config)
       end
     
     end
@@ -41,5 +41,5 @@ module Warden
   end
 end
 
-Warden::Config.send(:include, Warden::OAuth::ConfigExtension)
+Warden::Config.send(:include, Warden::OAuth2::ConfigExtension)
 
