@@ -43,7 +43,10 @@ module Warden
       def authenticate!
         if params.include?('warden_oauth2_provider')
           # store_request_token_on_session
-          redirect!(client.web_server.authorize_url(:redirect_uri => redirect_uri))
+          redirect!(client.web_server.authorize_url(
+            :redirect_uri => redirect_uri,
+            :scope => config.scope
+          ))
           throw(:warden)
         elsif params.include?('code')
           false and load_request_token_from_session
