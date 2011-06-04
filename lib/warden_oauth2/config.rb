@@ -30,6 +30,14 @@ module Warden
         @options
       end
       alias_method :options=, :options
+      
+      def scope(scope = nil)
+        unless scope.nil?
+          @scope = scope
+        end
+        @scope
+      end
+      alias_method :scope=, :scope
 
       def check_requirements
         if @client_key.nil? || @client_secret.nil?
